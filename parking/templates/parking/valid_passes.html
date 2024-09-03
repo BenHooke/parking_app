@@ -1,0 +1,61 @@
+{% extends 'parking/base.html' %}
+
+{% block title %}Valid Passes{% endblock %}
+
+{% block content %}
+
+  <div class='row'>
+    <div class='col'>
+      <br>
+      <h5>Active Passes</h5>
+      <hr>
+      <div class='card card-body'>
+        <div class='table-responsive'>
+          <table class='table table-sm'>
+            <tr>
+              <th>Name</th>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Licence Plate</th>
+              <th class="d-none d-sm-table-cell">Time</th>
+            </tr>
+
+            {% for pass in passes %}
+            <tr>
+              <td>{{pass.user}}</td>
+              <td>{{pass.make}}</td>
+              <td>{{pass.model}}</td>
+              <td>{{pass.plate}}</td>
+              <td class="d-none d-sm-table-cell">{{pass.created_at}}</td>
+            </tr>
+            {% endfor %}
+
+            {% comment %} <tr>
+              <td>Michelle</td>
+              <td>Dodge</td>
+              <td>Grand Caravan</td>
+              <td>CZFV-185</td>
+              <td class="d-none d-sm-table-cell">10:45pm</td>
+            </tr>
+            <tr>
+              <td>Ben</td>
+              <td>Buick</td>
+              <td>Skylark</td>
+              <td>BNR-9001</td>
+              <td class="d-none d-sm-table-cell">2:50pm</td>
+            </tr>
+            <tr>
+              <td>Michelle</td>
+              <td>Vespa</td>
+              <td>Scooter</td>
+              <td>MCHL-123</td>
+              <td class="d-none d-sm-table-cell">3:24am</td>
+            </tr> {% endcomment %}
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

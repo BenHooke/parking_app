@@ -1,0 +1,78 @@
+{% extends 'parking/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+  <div class='row'>
+    <div class='col-12 col-lg-3'>
+      <br>
+      <br>
+      <br>
+      <div class='card card-body'>
+        <a class='btn btn-primary' href="{% url 'request_pass' tenant.user_id %}">Request a Pass</a>
+      </div>
+    </div>
+
+    
+    <div class='col-12 col-lg-9'>
+      <br>
+      <h3>History</h3>
+      <hr>
+      <div class='card card-body'>
+        <div class='table-responsive'>
+          
+          <table class='table table-sm'>
+            <tr>
+              <th>Make</th>
+              <th>Model</th>
+              <th>Plate</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+            {% for pass in page_obj %}
+            <tr>
+              <td>{{pass.make}}</td>
+              <td>{{pass.model}}</td>
+              <td>{{pass.plate}}</td>
+              <td>{{pass.created_at}}</td>
+              {% if pass.approved %}
+              <td>Approved</td>
+              {% else %}
+              <td>Pending</td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+
+          <div class='pagination'>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-4 text-left'>
+                  {% if page_obj.has_previous %}
+                    {% comment %} <a href='?page=1'>&laquo; first</a> {% endcomment %}
+                    <a href='?page={{ page_obj.previous_page_number }}'>previous</a>
+                  {% endif %}
+                </div>
+
+                <div class='col-4 text-center'>
+                  <span class='current'>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}
+                  </span>
+                </div>
+
+                <div class='col-4 text-right text-end'>
+                  {% if page_obj.has_next %}
+                    <a href='?page={{ page_obj.next_page_number }}'>next</a>
+                    {% comment %} <a href='?page={{ page_obj.paginator.num_pages }}'>last &raquo;</a> {% endcomment %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

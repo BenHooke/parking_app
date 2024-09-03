@@ -1,0 +1,23 @@
+{% extends 'parking/base.html' %}
+{% block title %}{{tenant.first_name}}'s Profile{% endblock %}
+
+{% block content %}
+
+<br>
+<div class='row'>
+  <div class='col-12 col-lg-8 offset-lg-2'>
+    <div class='card'>
+      <div class='card-header'>
+        <h2>{{tenant.first_name}} {{tenant.last_name}}</h2>
+      </div> 
+      <div class='card-body'>
+        <h4>Building: {{tenant.building}}</h4>
+        <h4>Unit: {{tenant.unit}}</h4>
+        <h4>Phone: {{tenant.phone}}</h4>
+        <h4>Email: {{tenant.email}}</h4>
+      </div>
+  </div>
+  </div>
+</div>
+
+{% endblock %}

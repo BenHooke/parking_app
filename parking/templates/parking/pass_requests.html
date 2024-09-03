@@ -1,0 +1,74 @@
+{% extends 'parking/base.html' %}
+
+{% block title %}Requests{% endblock %}
+
+{% block content%}
+
+  <div class='row'>
+    <div class='col'>
+      <br>
+      <h5>Pass Requests</h5>
+      <hr>
+      <div class='card card-body'>
+        {% if passes %}
+        <div class='table-responsive'>
+          <table class='table table-sm'>
+            <tr>
+              <th>Name</th>
+              <th>Time</th>
+              <th></th>
+              <th></th>
+            </tr>
+            {% for pass in passes %}
+            <tr>
+              <td>{{pass.user}}</td>
+              <td>{{pass.created_at}}</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#passDetails">
+                  Details
+                </button>
+                <div class="modal fade" id="passDetails" tabindex="-1" aria-labelledby="passDetailsLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="passDetailsLabel">Pass Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <ul>
+                          <li>Name: {{pass.user}}</li>
+                          <li>Make: {{pass.make}}</li>
+                          <li>Model: {{pass.model}}</li>
+                          <li>Plate: {{pass.plate}}</li>
+                          <li>Time: {{pass.created_at}}</li>
+                        </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <form method='post' action="{% url 'requests' %}">
+                  {% csrf_token %}
+                  <input type='hidden' name='pass_id' value='{{ pass.id }}'>
+                  <button type='submit' class='btn btn-sm btn-success'>Approve</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </table>
+
+          {% else %}
+          <h2>No current requests</h2>
+          <h5>Check back later</h5>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

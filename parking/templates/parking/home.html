@@ -1,0 +1,89 @@
+{% extends 'parking/base.html' %}
+
+{% block content %}
+
+  <div class='row'>
+    <div class='col-lg-9 col-12'>
+      <br>
+      <h5>Recent Activity</h5>
+      <hr>
+      <div class='card card-body'>
+        {% if page_obj %}
+        <table class='table table-sm table-responsive d-flex flex-wrap'>
+          
+          
+          <tr>
+            <th>Name</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Licence Plate</th>
+            <th class="d-none d-sm-table-cell">Time</th>
+          </tr>
+          
+          {% for pass in page_obj %}
+          <tr>
+            <td>{{pass.user}}</td>
+            <td>{{pass.make}}</td>
+            <td>{{pass.model}}</td>
+            <td>{{pass.plate}}</td>
+            <td class="d-none d-sm-table-cell">{{pass.created_at}}</td>
+          </tr>
+          {% endfor %}
+          </table>
+
+          <div class='pagination'>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-4 text-left'>
+                  {% if page_obj.has_previous %}
+                    {% comment %} <a href='?page=1'>&laquo; first</a> {% endcomment %}
+                    <a href='?page={{ page_obj.previous_page_number }}'>previous</a>
+                  {% endif %}
+                </div>
+
+                <div class='col-4 text-center'>
+                  <span class='current'>
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}
+                  </span>
+                </div>
+
+                <div class='col-4 text-right text-end'>
+                  {% if page_obj.has_next %}
+                    <a href='?page={{ page_obj.next_page_number }}'>next</a>
+                    {% comment %} <a href='?page={{ page_obj.paginator.num_pages }}'>last &raquo;</a> {% endcomment %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% else %}
+          <div>
+            <h3>No Requests</h3>
+          </div>
+          {% endif %}
+
+      </div>
+    </div>
+    <div class='col-lg-3 col-12'>
+      <br>
+      <h5>Pending</h5>
+      <hr>
+      <div class='card'>
+        <div class='card-header d-flex justify-content-center'>
+          Requests
+        </div>
+        <div class='card-body d-flex justify-content-center'>
+          <h1>
+            <a  href="{% url 'requests' %}" 
+                  class='text-decoration-none'>
+                  {{ unapproved_passes.count }}
+            </a>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+{% endblock %}

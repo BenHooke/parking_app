@@ -1,0 +1,21 @@
+{% extends 'parking/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+  
+  <br>
+  <h3>Sign Up</h3>
+  <hr>
+  <div class='row'>
+    <div class='col-12 col-md-6 offset-md-3 offset-sm-1'>
+      <form method='POST' class='form-sm'>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type='submit' class='btn btn-primary'>Register</button>
+      </form>
+    </div>
+  </div>
+  <br>
+
+{% endblock %}

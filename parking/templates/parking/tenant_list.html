@@ -1,0 +1,36 @@
+{% extends 'parking/base.html' %}
+{% block title %}Tenants{% endblock %}
+
+{% block content %}
+
+<div class='row'>
+  <div class='col'>
+    <br>
+    <h3>Tenants</h3>
+    <hr>
+    <div class='card card-body'>
+      <div class='table-responsive'>
+        <table class='table table-sm '>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Building</th>
+            <th>Unit</th>
+          </tr>
+          {% for tenant in tenants %}
+          <tr>
+            <td>{{tenant.first_name}} {{tenant.last_name}}</td>
+            <td>{{tenant.phone}}</td>
+            <td>{{tenant.email}}</td>
+            <td>{{tenant.building}}</td>
+            <td>{{tenant.unit}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

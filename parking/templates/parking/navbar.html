@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Parking</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        
+        {% if user.is_authenticated %}  {% comment %} Assures user is logged in {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        
+        {% if user.is_staff %}  {% comment %} Keeps staff permissions from tenants {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link" href="/passes">Active Passes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/requests">Pass Requests</a>
+        </li>
+        {% endif %}
+
+        {% if user.is_superuser %}  {% comment %} Gives admins all permissions {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link" href="/staff_list">Staff</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tenant_list' %}">Users</a>
+        </li>
+        {% endif %}
+
+        {% if not user.is_staff and not user.is_superuser %}  {% comment %} This hides the profile button from staff and admin {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+        </li>
+        {% endif %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+        {% else %}  {% comment %} Only shows login and register while logged out {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
