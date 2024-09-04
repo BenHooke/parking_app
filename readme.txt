@@ -6,12 +6,12 @@ Make sure Python 3 is installed.
 
 Start a virtual environment and then run the code: 
 
-    pip3 install -r requirements.txt
+  pip3 install -r requirements.txt
 
 Once you have everything installed cd into the folder with 'manage.py'
 and run this line:
 
-    python3 manage.py createsuperuser
+  python3 manage.py createsuperuser
 
 This will prompt you to create an admin for the site.
 
@@ -20,9 +20,9 @@ of python3, on Mac/Linux commands start with pip3 and python3*
 
 Once you're made an admin user run these lines:
 
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-    python3 manage.py runserver
+  python3 manage.py makemigrations
+  python3 manage.py migrate
+  python3 manage.py runserver
 
 This will transfer the models into an SQLite database and start the
 site on your local host, then just enter your local host into your
