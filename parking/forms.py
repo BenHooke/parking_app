@@ -22,6 +22,12 @@ class TenantRegistrationForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
     
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("This username is already taken.")
+        return username
+    
     def save(self, commit=True):
         user = User.objects.create_user(
             username=self.cleaned_data['username'],

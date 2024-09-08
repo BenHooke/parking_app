@@ -30,7 +30,7 @@ browsers URL line or if you're using VS Code you can CTRL click
 the address in the terminal.
 
 You can then log in as your admin to see the website with all features,
-register a staff member as the admin and log in as them, then you can
+register some buildings from the Users page, register a staff member as the admin and log in as them, then you can
 register as a user and try requesting a parking pass and look at, and 
 approve requests as a staff member or admin.
 

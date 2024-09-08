@@ -92,9 +92,19 @@ def staff_list(request):
 @login_required(login_url='/login')
 @admin_only
 def tenant_list(request):
-    tenants = Tenant.objects.all()
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        if user_id:
+            new_tenant = get_object_or_404(Tenant, user_id=user_id)
+            if request.user.is_superuser:
+                new_tenant.approved = True
+                new_tenant.save()
+        return redirect('tenant_list')
     
-    context = {'tenants': tenants}
+    tenants = Tenant.objects.all()
+    tenant_requests = tenants.filter(approved=False).exists
+    
+    context = {'tenants': tenants, 'tenant_requests': tenant_requests}
     return render(request, 'parking/tenant_list.html', context)
 
 
