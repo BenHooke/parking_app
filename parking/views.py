@@ -130,6 +130,20 @@ def register_staff(request):
     return render(request, 'registration/register_staff.html', context)
 
 
+def register_building(request):
+    if request.method == 'POST':
+        form = NewBuildingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('tenant_list')
+    else:
+        form = NewBuildingForm()
+    
+    context = {'form': form}
+    return render(request, 'registration/register_building.html', context)
+
+
 @login_required(login_url='/login')
 def request_pass(request, pk):
     tenant = get_object_or_404(Tenant, user_id=pk)

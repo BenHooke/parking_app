@@ -72,3 +72,9 @@ class StaffWorkingNowForm(forms.ModelForm):
     class Meta:
         model = Staff
         fields = ['is_working']
+        
+        
+class NewBuildingForm(forms.ModelForm):
+    class Meta:
+        model = Building
+        fields = '__all__'
