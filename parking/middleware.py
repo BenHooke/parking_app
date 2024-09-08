@@ -9,8 +9,11 @@ class ApprovalRequiredMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         
-        if request.path.startswith('/admin/') or request.path == reverse('approval_pending'):
+        if (request.path.startswith('/admin/')
+            or request.path == reverse('approval_pending')
+            or request.path in [reverse('login'), reverse('logout')]):
             return response
+        
         
         if (request.user.is_authenticated 
         and not request.user.is_staff 

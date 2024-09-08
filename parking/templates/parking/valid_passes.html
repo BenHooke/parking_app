@@ -10,6 +10,7 @@
       <h5>Active Passes</h5>
       <hr>
       <div class='card card-body'>
+        {% if passes %}
         <div class='table-responsive'>
           <table class='table table-sm'>
             <tr>
@@ -30,29 +31,13 @@
             </tr>
             {% endfor %}
 
-            {% comment %} <tr>
-              <td>Michelle</td>
-              <td>Dodge</td>
-              <td>Grand Caravan</td>
-              <td>CZFV-185</td>
-              <td class="d-none d-sm-table-cell">10:45pm</td>
-            </tr>
-            <tr>
-              <td>Ben</td>
-              <td>Buick</td>
-              <td>Skylark</td>
-              <td>BNR-9001</td>
-              <td class="d-none d-sm-table-cell">2:50pm</td>
-            </tr>
-            <tr>
-              <td>Michelle</td>
-              <td>Vespa</td>
-              <td>Scooter</td>
-              <td>MCHL-123</td>
-              <td class="d-none d-sm-table-cell">3:24am</td>
-            </tr> {% endcomment %}
-
           </table>
+
+          {% else %}
+          <h2>No Active Passes</h2>
+          <h5>Check back later</h5>
+          {% endif %}
+
         </div>
       </div>
     </div>

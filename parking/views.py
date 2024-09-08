@@ -6,12 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
+from django.urls import reverse
 from .forms import *
 from .models import *
 from .decorators import *
 
 @login_required(login_url='/login')
-@staff_only
 def home(request):
     approved_passes = Pass.objects.filter(approved=True).order_by('-created_at')
     unapproved_passes = Pass.objects.filter(approved=False)
@@ -24,7 +24,10 @@ def home(request):
                'unapproved_passes': unapproved_passes,
                'page_obj': page_obj}
     
-    return render(request, 'parking/home.html', context)
+    if request.user.is_staff or request.user.is_superuser:
+        return render(request, 'parking/home.html', context)
+    else:
+        return redirect(reverse('dashboard', args=[request.user.tenant.pk]))
 
 
 @login_required(login_url='/login')
